@@ -1,0 +1,40 @@
+---
+title: "Lab 5"
+output: html_document
+date: "2025-10-02"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r linear-regression, message=FALSE, warning=FALSE}
+# Load dataset
+data(iris)
+
+# Fit a linear regression model: Sepal.Width ~ Sepal.Length
+lm_model <- lm(Sepal.Width ~ Sepal.Length, data = iris)
+
+# Model summary
+summary(lm_model)
+
+# Predictions for new Sepal.Length values within the range of iris data
+new_data <- data.frame(Sepal.Length = c(5, 6, 7))
+predictions <- predict(lm_model, new_data, interval = "confidence")
+predictions
+
+# Plot data with regression line
+plot(iris$Sepal.Length, iris$Sepal.Width, 
+     pch = 19, col = "blue", 
+     xlab = "Sepal Length", ylab = "Sepal Width",
+     main = "Linear Regression: Sepal Width ~ Sepal Length") 
+abline(lm_model, col = "red", lwd = 2)
+
+```
+
